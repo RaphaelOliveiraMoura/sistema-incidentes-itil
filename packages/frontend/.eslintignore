@@ -1,0 +1,4 @@
+# Files referenced on next.config.js on eslint dirs section
+!.eslintrc.json
+!.prettierrc.json
+!tsconfig.json
