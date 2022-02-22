@@ -1,4 +1,7 @@
 {
+  "globals": {
+    "jest": true
+  },
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
