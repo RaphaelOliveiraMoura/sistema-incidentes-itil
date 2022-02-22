@@ -1,0 +1,12 @@
+{
+  "StyleComponent": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "sn-style-component",
+    "body": [
+      "import styled from 'styled-components'",
+      "",
+      "export const Wrapper = styled.div``"
+    ],
+    "description": "create a base style component structure"
+  }
+}

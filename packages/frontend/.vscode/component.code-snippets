@@ -1,0 +1,18 @@
+{
+  "BaseComponent": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "sn-base-component",
+    "body": [
+      "import React from 'react';",
+      "",
+      "import * as S from './styles';",
+      "",
+      "export type $1Props = {};",
+      "",
+      "export const $1: React.FC<$1Props> = () => {",
+      "  return <S.Wrapper>$1</S.Wrapper>;",
+      "};"
+    ],
+    "description": "create a base component structure"
+  }
+}
