@@ -3,5 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "RaphaelOliveira <raphaeldeoliveiramoura@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "prepare": "husky install",
+    "pre-commit": "lerna run pre-commit",
+    "pre-push": "lerna run pre-push"
+  },
+  "devDependencies": {
+    "husky": "^7.0.0",
+    "lerna": "^4.0.0"
+  }
 }

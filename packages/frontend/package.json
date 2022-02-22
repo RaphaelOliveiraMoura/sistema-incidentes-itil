@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint --no-cache",
     "fix": "next lint --no-cache --fix",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "test:ci": "jest --ci --passWithNoTests",
+    "pre-commit": "yarn lint",
+    "pre-push": "yarn lint && yarn build && yarn test:ci"
   },
   "dependencies": {
     "next": "12.1.0",
