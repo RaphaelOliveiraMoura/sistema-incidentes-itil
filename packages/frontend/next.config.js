@@ -5,7 +5,7 @@ const nextConfig = {
     dirs: ['.', '.eslintrc.json', '.prettierrc.json', 'tsconfig.json']
   },
   compiler: {
-    styledComponents: true,
+    styledComponents: true
   }
 }
 
