@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   eslint: {
-    dirs: ['.', '.eslintrc.json', '.prettierrc.json']
+    dirs: ['.', '.eslintrc.json', '.prettierrc.json', '.storybook']
   },
   compiler: {
     styledComponents: true
