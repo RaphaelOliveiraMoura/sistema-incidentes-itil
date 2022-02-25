@@ -1,4 +1,6 @@
-export * from './Text'
 export * from './Button'
+export * from './Dropdown'
 export * from './Link'
+export * from './Spinner'
+export * from './Text'
 export * from './Tooltip'
