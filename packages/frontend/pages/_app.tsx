@@ -5,8 +5,8 @@ import { GlobalStyles } from 'styles/globals'
 
 function App({ Component, pageProps }: AppProps) {
   const configs = {
-    title: 'Carona Fácil',
-    description: 'TODO: add description',
+    title: 'Sistema de Incidentes',
+    description: 'Este é um sistema de gerenciamente de incidentes ITIL',
     themeColor: '#000'
   }
 
