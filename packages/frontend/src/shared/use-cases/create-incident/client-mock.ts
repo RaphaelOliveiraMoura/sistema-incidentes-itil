@@ -13,5 +13,7 @@ export const createIncident: CreateIncident = async (incidentDAO) => {
 
   incidents.push(incident)
 
+  localStorage.setItem('@incidents', JSON.stringify(incidents))
+
   return incident
 }

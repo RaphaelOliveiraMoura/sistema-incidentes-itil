@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 
+import { ToastProvider } from 'shared/services/toast'
 import { GlobalStyles } from 'styles/globals'
 
 function App({ Component, pageProps }: AppProps) {
@@ -21,7 +22,9 @@ function App({ Component, pageProps }: AppProps) {
         <meta name="description" content={configs.description} />
       </Head>
       <GlobalStyles />
-      <Component {...pageProps} />
+      <ToastProvider>
+        <Component {...pageProps} />
+      </ToastProvider>
     </>
   )
 }

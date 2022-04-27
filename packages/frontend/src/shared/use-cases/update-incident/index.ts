@@ -1,3 +1,3 @@
 export * from './types'
 
-export * as client from './client-mock'
+export { updateIncident as updateIncidentClient } from './client-mock'
