@@ -15,4 +15,5 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
   padding: 8px;
   background: #fff;
+  min-width: 600px;
 `

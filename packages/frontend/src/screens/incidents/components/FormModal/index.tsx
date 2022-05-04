@@ -1,98 +1,90 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 
-import { Button, Modal } from 'shared/components'
+import {
+  Button,
+  Modal,
+  TextField,
+  SelectInput,
+  Text,
+  TextArea,
+  Form
+} from 'shared/components'
 import { ModalType } from 'shared/hooks'
-import { IncidentDAO, IncidentStatus } from 'shared/models'
-import { toast } from 'shared/services/toast/implementations/react-toastify'
-import { client } from 'shared/use-cases'
+
+import * as options from './options'
+import { useFormModal } from './useFormModal'
+import * as S from './styles'
 
 export type FormModalProps = {
   modalControl: ModalType<string | undefined>
   refreshTable: () => Promise<void>
 }
 
-const inititalFormData: IncidentDAO = {
-  title: '',
-  description: '',
-  priority: 1,
-  status: IncidentStatus.open,
-  attachments: []
-}
+export const FormModal: React.FC<FormModalProps> = (props) => {
+  const { modalControl } = props
 
-export const FormModal: React.FC<FormModalProps> = ({
-  modalControl,
-  refreshTable
-}) => {
-  const [formData, setFormData] = useState<IncidentDAO>(inititalFormData)
+  const {
+    loading,
+    isEditing,
+    touchedForm,
 
-  const [loading, setLoading] = useState(false)
+    formData,
+    onChangeValue,
 
-  const id = modalControl.params
-  const isEditing = modalControl.params !== undefined
-
-  const cleanupSuccess = useCallback(() => {
-    refreshTable()
-    modalControl.close()
-  }, [refreshTable, modalControl])
-
-  const createIncident = useCallback(async () => {
-    try {
-      setLoading(true)
-      await client.createIncident(formData)
-      toast.success({ title: 'Incidente cadastrado com sucesso' })
-      cleanupSuccess()
-    } catch (error) {
-      toast.error({ title: 'Erro ao cadastrar incidente', error })
-    } finally {
-      setLoading(false)
-    }
-  }, [formData, cleanupSuccess])
-
-  const updateIncident = useCallback(async () => {
-    try {
-      if (!id) return
-      setLoading(true)
-      await client.updateIncident({ id, ...formData })
-      toast.success({ title: 'Incidente atualizado com sucesso' })
-      cleanupSuccess()
-    } catch (error) {
-      toast.error({ title: 'Erro ao atualizar incidente', error })
-    } finally {
-      setLoading(false)
-    }
-  }, [id, formData, cleanupSuccess])
-
-  const getIncidentDetails = useCallback(async () => {
-    try {
-      if (!id) return
-      setLoading(true)
-      const response = await client.getIncidentDetails(id)
-      setFormData(response)
-    } catch (error) {
-      toast.error({ title: 'Erro ao buscar detalhes do incidente', error })
-    } finally {
-      setLoading(false)
-    }
-  }, [id])
-
-  useEffect(() => {
-    getIncidentDetails()
-  }, [getIncidentDetails])
+    createIncident,
+    updateIncident
+  } = useFormModal(props)
 
   if (loading) return <div>carregando...</div>
 
   return (
-    <Modal isOpen={modalControl.isOpen} onClose={modalControl.close}>
-      form modal
-      {isEditing ? (
-        <Button type="submit" onClick={updateIncident}>
-          Atualizar
-        </Button>
-      ) : (
-        <Button type="submit" onClick={createIncident}>
-          Cadastrar
-        </Button>
-      )}
+    <Modal
+      isOpen={modalControl.isOpen}
+      onClose={modalControl.close}
+      closeOnClickOutside={false}
+    >
+      <S.Wrapper>
+        <Form onSubmit={isEditing ? updateIncident : createIncident}>
+          <Text variant="title">
+            {isEditing ? 'Editar incidente' : 'Cadastrar novo incidente'}
+          </Text>
+
+          <TextField
+            label="Título"
+            value={formData.title}
+            onChange={onChangeValue('title')}
+            touched={touchedForm || undefined}
+          />
+
+          <TextArea
+            label="Descrição"
+            value={formData.description}
+            onChange={onChangeValue('description')}
+            touched={touchedForm || undefined}
+          />
+
+          <SelectInput
+            label="Status"
+            value={formData.status}
+            options={options.incidentStatusOptions}
+            onChange={onChangeValue('status')}
+            touched={touchedForm || undefined}
+          />
+
+          <SelectInput
+            label="Prioridade"
+            value={formData.priority}
+            options={options.incidentPriorityOptions}
+            onChange={onChangeValue('priority')}
+            touched={touchedForm || undefined}
+          />
+
+          <Button type="submit">{isEditing ? 'Atualizar' : 'Cadastrar'}</Button>
+          <Button variant="cancel" onClick={modalControl.close}>
+            Cancelar
+          </Button>
+        </Form>
+      </S.Wrapper>
     </Modal>
   )
 }

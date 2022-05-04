@@ -23,5 +23,9 @@ export const Text: React.FC<TextProps> = ({
 }) => {
   const textHtmlTag = tagsMap[variant]
 
-  return <S.Wrapper as={textHtmlTag}>{children}</S.Wrapper>
+  return (
+    <S.Wrapper as={textHtmlTag} $variant={variant}>
+      {children}
+    </S.Wrapper>
+  )
 }

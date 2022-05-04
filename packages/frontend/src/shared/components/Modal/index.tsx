@@ -10,6 +10,8 @@ export type ModalProps = {
   closeOnClickOutside?: boolean
 }
 
+export * from './ConfirmModal'
+
 export const Modal: React.FC<ModalProps> = ({
   onClose,
   isOpen = true,

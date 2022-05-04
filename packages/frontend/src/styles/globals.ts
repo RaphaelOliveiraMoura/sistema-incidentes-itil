@@ -7,8 +7,9 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  html {
-    font-size: 62.5%;
+  * {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
   }
 
   html, body, #__next {

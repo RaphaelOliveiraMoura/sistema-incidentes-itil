@@ -1,5 +1,7 @@
 export * from './Button'
 export * from './Dropdown'
+export * from './Form'
+export * from './Inputs'
 export * from './Link'
 export * from './Modal'
 export * from './Spinner'
