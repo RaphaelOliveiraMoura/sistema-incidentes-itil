@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
 
-import { TextProps } from '.'
+import { TextVariants } from '.'
 
 type WrapperProps = {
-  $variant: Pick<TextProps, 'variant'>
+  $variant: TextVariants
 }
 
 export const Wrapper = styled.div<WrapperProps>`
@@ -11,5 +11,12 @@ export const Wrapper = styled.div<WrapperProps>`
     p.$variant === 'title' &&
     css`
       font-size: 18px;
+    `}
+
+  ${(p) =>
+    p.$variant === 'headerTitle' &&
+    css`
+      font-size: 32px;
+      font-weight: normal;
     `}
 `

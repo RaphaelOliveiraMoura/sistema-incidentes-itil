@@ -5,8 +5,9 @@ import { IncidentDAO, IncidentPriority, IncidentStatus } from 'shared/models'
 import { toast } from 'shared/services/toast'
 import { client } from 'shared/use-cases'
 
-import * as options from './options'
 import { validateForm } from './validation'
+
+import * as options from '../../options'
 
 import { FormModalProps } from '.'
 

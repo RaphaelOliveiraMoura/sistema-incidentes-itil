@@ -3,7 +3,7 @@ import React from 'react'
 import * as S from './styles'
 import { ValidHtmlTextTags } from './types'
 
-export type TextVariants = 'default' | 'title' | 'subtitle'
+export type TextVariants = 'default' | 'headerTitle' | 'title' | 'subtitle'
 
 export type TextProps = {
   variant?: TextVariants
@@ -13,6 +13,7 @@ type TagsMap = { [key in TextVariants]: ValidHtmlTextTags }
 
 const tagsMap: TagsMap = {
   default: 'p',
+  headerTitle: 'h1',
   title: 'h1',
   subtitle: 'h2'
 }

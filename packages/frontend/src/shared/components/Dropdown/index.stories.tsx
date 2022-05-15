@@ -18,9 +18,9 @@ const Template: ComponentStory<typeof Dropdown> = (args) => (
 export const Default = Template.bind({})
 Default.args = {
   items: [
-    { label: 'item 1' },
-    { label: 'item 2' },
-    { label: 'item 3' },
-    { label: 'item 4' }
+    { label: 'item 1', onClick: () => null },
+    { label: 'item 2', onClick: () => null },
+    { label: 'item 3', onClick: () => null },
+    { label: 'item 4', onClick: () => null }
   ]
 }

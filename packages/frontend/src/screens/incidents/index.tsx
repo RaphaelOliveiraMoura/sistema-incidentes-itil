@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button, ConfirmModal, Table, Text } from 'shared/components'
+import { Button, ConfirmModal, Header, Table, Text } from 'shared/components'
 import { CenteredFullViewPort } from 'shared/templates'
 
 import { FormModal } from './components/FormModal'
@@ -22,6 +22,8 @@ export const IncidentsScreens: React.FC = () => {
 
   return (
     <CenteredFullViewPort>
+      <Header />
+
       <S.Wrapper>
         <header>
           <Text variant="title">Listagem de incidentes</Text>

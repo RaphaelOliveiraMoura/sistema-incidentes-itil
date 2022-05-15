@@ -4,6 +4,8 @@ import Head from 'next/head'
 import { ToastProvider } from 'shared/services/toast'
 import { GlobalStyles } from 'styles/globals'
 
+import 'antd/dist/antd.css'
+
 function App({ Component, pageProps }: AppProps) {
   const configs = {
     title: 'Sistema de Incidentes',

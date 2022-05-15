@@ -8,8 +8,8 @@ export const Wrapper = styled.table`
 
   th {
     padding: 8px;
-    border-bottom: 1px solid #333;
-    border-top: 1px solid #333;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
     text-align: left;
   }
 

@@ -11,12 +11,13 @@ import {
 } from 'shared/components'
 import { ModalType } from 'shared/hooks'
 
-import * as options from './options'
 import { useFormModal } from './useFormModal'
 import * as S from './styles'
 
+import * as options from '../../options'
+
 export type FormModalProps = {
-  modalControl: ModalType<string | undefined>
+  modalControl: ModalType<string>
   refreshTable: () => Promise<void>
 }
 

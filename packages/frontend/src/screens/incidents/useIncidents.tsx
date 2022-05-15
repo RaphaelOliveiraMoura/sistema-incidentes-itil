@@ -1,17 +1,20 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { BsThreeDotsVertical } from 'react-icons/bs'
 
-import { Button } from 'shared/components'
+import { Button, Dropdown } from 'shared/components'
 import { Column, RowData } from 'shared/components/Table/types'
 import { useModal } from 'shared/hooks'
 import { Incident, IncidentStatus } from 'shared/models'
 import { toast } from 'shared/services/toast'
 import { client } from 'shared/use-cases'
 
+import { incidentPriorityMap } from './options'
+
 export const useIncidents = () => {
   const [incidents, setIncidents] = useState<Incident[]>([])
   const [loading, setLoading] = useState(false)
 
-  const formModal = useModal<string | undefined>()
+  const formModal = useModal<string>()
   const closeModal = useModal<Incident>()
 
   const rows = useMemo<RowData<Incident>[]>(
@@ -23,17 +26,31 @@ export const useIncidents = () => {
     { path: 'id', label: 'Id' },
     { path: 'title', label: 'Título' },
     { path: 'description', label: 'Descrição' },
-    { path: 'priority', label: 'Prioridade' },
+    {
+      path: 'priority',
+      label: 'Prioridade',
+      content: (row) => incidentPriorityMap[row.priority]
+    },
     {
       path: 'status',
       label: 'Status',
+      content: (row) =>
+        row.status === IncidentStatus.closed ? 'Fechado' : 'Aberto'
+    },
+    {
+      path: 'actions',
+      label: 'Ações',
       content: (row) => {
         if (row.status === IncidentStatus.closed) return 'Fechado'
         return (
-          <div className="status">
-            <Button>Editar</Button>
-            <Button onClick={() => closeModal.open(row)}>Fechar</Button>
-          </div>
+          <Dropdown
+            items={[
+              { label: 'Editar', onClick: () => formModal.open(row.id) },
+              { label: 'Fechar', onClick: () => closeModal.open(row) }
+            ]}
+          >
+            <Button variant="icon" icon={<BsThreeDotsVertical />} />
+          </Dropdown>
         )
       }
     }
