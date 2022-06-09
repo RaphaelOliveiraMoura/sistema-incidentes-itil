@@ -7,5 +7,22 @@ export const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 16px;
+
+    & button {
+      margin-left: 8px;
+    }
+  }
+
+  #no-options {
+    width: 100%;
+    text-align: center;
+    margin: 16px;
+  }
+
+  table tbody tr td:nth-child(3) {
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `

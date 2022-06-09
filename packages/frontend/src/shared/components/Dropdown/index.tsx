@@ -6,6 +6,7 @@ import * as S from './styles'
 type DropdownMenuItem = {
   label: string
   onClick: () => void
+  hide?: boolean
 }
 
 export type DropdownProps = {
@@ -13,10 +14,12 @@ export type DropdownProps = {
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({ children, items }) => {
-  const antdItems = items.map((item) => ({
-    key: item.label,
-    label: <div onClick={item.onClick}>{item.label}</div>
-  }))
+  const antdItems = items
+    .filter(({ hide = false }) => !hide)
+    .map((item) => ({
+      key: item.label,
+      label: <div onClick={item.onClick}>{item.label}</div>
+    }))
 
   return (
     <S.Wrapper>

@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
 
 import { Option } from 'shared/components'
-import { IncidentDAO, IncidentPriority, IncidentStatus } from 'shared/models'
+import {
+  FileType,
+  IncidentDAO,
+  IncidentPriority,
+  IncidentStatus
+} from 'shared/models'
 import { toast } from 'shared/services/toast'
 import { client } from 'shared/use-cases'
 
@@ -16,13 +21,13 @@ export type FormData = {
   description: string
   priority: Option
   status: Option
-  attachments: File[]
+  attachments: FileType[]
 }
 
 const inititalFormData: FormData = {
   title: '',
   description: '',
-  priority: { label: '', value: '' },
+  priority: options.incidentPriorityOptions[2],
   status: options.incidentStatusOptions[0],
   attachments: []
 }
@@ -84,6 +89,11 @@ export const useFormModal = ({
       toast.success({ title: 'Incidente cadastrado com sucesso' })
       cleanupSuccess()
     } catch (error) {
+      const errorName = (error as Error).name
+      if (errorName === 'QuotaExceededError') {
+        return toast.error({ title: 'Limite de armazenamento estourou', error })
+      }
+
       toast.error({ title: 'Erro ao cadastrar incidente', error })
     } finally {
       setLoading(false)
@@ -105,6 +115,11 @@ export const useFormModal = ({
       toast.success({ title: 'Incidente atualizado com sucesso' })
       cleanupSuccess()
     } catch (error) {
+      const errorName = (error as Error).name
+      if (errorName === 'QuotaExceededError') {
+        return toast.error({ title: 'Limite de armazenamento estourou', error })
+      }
+
       toast.error({ title: 'Erro ao atualizar incidente', error })
     } finally {
       setLoading(false)

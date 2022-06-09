@@ -21,6 +21,7 @@ const success: ToastSuccess = (params) => {
 }
 
 const error: ToastError = (params) => {
+  console.error(params.error)
   toastify.error(params.title)
 }
 

@@ -76,7 +76,10 @@ export const SelectInput: React.FC<SelectInputProps> = ({
         value={inputValue}
         onChange={setInputValue}
         iconRight={<S.DropdownIcon onClick={() => setDropdownOpen(true)} />}
-        inputProps={{ onFocus: () => setDropdownOpen(true) }}
+        inputProps={{
+          ...props.inputProps,
+          onFocus: () => setDropdownOpen(true)
+        }}
       >
         {dropdownIsOpen && (
           <S.Dropdown>

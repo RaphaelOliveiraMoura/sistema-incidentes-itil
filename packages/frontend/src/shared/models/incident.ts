@@ -1,4 +1,4 @@
-import { IncidentStatus, IncidentPriority } from '.'
+import { FileType, IncidentStatus, IncidentPriority } from '.'
 
 export type Incident = {
   id: string
@@ -6,5 +6,5 @@ export type Incident = {
   title: string
   description: string
   priority: IncidentPriority
-  attachments: File[]
+  attachments: FileType[]
 }

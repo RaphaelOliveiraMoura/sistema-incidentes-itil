@@ -48,7 +48,7 @@ export const InputLabel = styled.label<InputLabelProps>`
   border-radius: 10px;
   padding-right: 20px;
   border: 1px solid #ddd;
-  background: ${(props) => (props.$isDisabled ? '#333' : 'white')};
+  background: ${(props) => (props.$isDisabled ? '#dedede' : 'white')};
   padding-left: ${(props) => props.$hasLeftButton && '30px'};
 
   &:hover {
