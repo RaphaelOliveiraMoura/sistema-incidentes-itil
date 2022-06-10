@@ -55,8 +55,26 @@ export const useIncidents = () => {
         a.priority.toString().localeCompare(b.priority.toString())
     },
     {
-      title: 'actions',
-      dataIndex: 'Ações',
+      title: 'Status',
+      dataIndex: 'status',
+      render: (_, row) => (
+        <div
+          style={{
+            background: row.status === IncidentStatus.closed ? 'red' : 'green',
+            width: '100%',
+            height: '100%',
+            color: 'white',
+            textAlign: 'center',
+            borderRadius: 8
+          }}
+        >
+          {row.status === IncidentStatus.closed ? 'Fechado' : 'Aberto'}
+        </div>
+      )
+    },
+    {
+      title: 'Ações',
+      dataIndex: 'actions',
       render: (_, row) => {
         return (
           <Dropdown
