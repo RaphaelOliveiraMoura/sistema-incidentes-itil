@@ -40,6 +40,7 @@ export const FileInput: React.FC<FileInputrops> = ({
         accept="*"
         multiple
         onChange={handleChange}
+        action={'/api/file'}
         disabled={disabled}
         showUploadList={{
           showDownloadIcon: fileHasNoURL ? false : true,
