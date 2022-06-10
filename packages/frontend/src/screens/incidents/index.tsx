@@ -64,7 +64,12 @@ export const IncidentsScreens: React.FC = () => {
           </div>
         </header>
 
-        <Table columns={columns} dataSource={rows} scroll={{ x: true }} />
+        <Table
+          columns={columns}
+          dataSource={rows}
+          scroll={{ x: true }}
+          pagination={{ position: ['bottomCenter'] }}
+        />
 
         {formViewModal.isOpen && (
           <FormModal
