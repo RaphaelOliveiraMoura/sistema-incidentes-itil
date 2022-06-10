@@ -1,5 +1,7 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import { ConfigProvider } from 'antd'
+import ptBR from 'antd/lib/locale/pt_BR'
 
 import { ToastProvider } from 'shared/services/toast'
 import { GlobalStyles } from 'styles/globals'
@@ -25,7 +27,9 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyles />
       <ToastProvider>
-        <Component {...pageProps} />
+        <ConfigProvider locale={ptBR}>
+          <Component {...pageProps} />
+        </ConfigProvider>
       </ToastProvider>
     </>
   )

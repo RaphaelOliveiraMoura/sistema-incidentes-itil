@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { ColumnsType } from 'antd/lib/table'
+import React, { useCallback, useEffect, useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 
 import { Button, Dropdown } from 'shared/components'
-import { Column, RowData } from 'shared/components/Table/types'
 import { useModal } from 'shared/hooks'
 import { Incident, IncidentStatus } from 'shared/models'
 import { toast } from 'shared/services/toast'
@@ -20,30 +20,44 @@ export const useIncidents = () => {
   const closeModal = useModal<Incident>()
   const deleteModal = useModal<Incident>()
 
-  const rows = useMemo<RowData<Incident>[]>(
-    () => incidents.map((incident) => ({ rowData: incident })),
-    [incidents]
-  )
-
-  const columns: Column<Incident>[] = [
-    { path: 'id', label: 'Id' },
-    { path: 'title', label: 'Título' },
-    { path: 'description', label: 'Descrição' },
+  const columns: ColumnsType<Incident> = [
     {
-      path: 'priority',
-      label: 'Prioridade',
-      content: (row) => incidentPriorityMap[row.priority]
+      title: 'Id',
+      dataIndex: 'id',
+      render: (_, row) => `#${row.id}`,
+      sorter: (a, b) => a.id.localeCompare(b.id)
     },
     {
-      path: 'status',
-      label: 'Status',
-      content: (row) =>
-        row.status === IncidentStatus.closed ? 'Fechado' : 'Aberto'
+      title: 'Data criação',
+      dataIndex: 'createdAt',
+      render: (_, row) =>
+        row.createdAt
+          ? new Intl.DateTimeFormat('pt-BR').format(new Date(row.createdAt))
+          : '---',
+      sorter: (a, b) =>
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
     },
     {
-      path: 'actions',
-      label: 'Ações',
-      content: (row) => {
+      title: 'Titútlo',
+      dataIndex: 'title',
+      sorter: (a, b) => a.title.localeCompare(b.title)
+    },
+    {
+      title: 'Descrição',
+      dataIndex: 'description',
+      sorter: (a, b) => a.description.localeCompare(b.description)
+    },
+    {
+      title: 'Prioridade',
+      dataIndex: 'priority',
+      render: (_, row: Incident) => incidentPriorityMap[row.priority],
+      sorter: (a, b) =>
+        a.priority.toString().localeCompare(b.priority.toString())
+    },
+    {
+      title: 'actions',
+      dataIndex: 'Ações',
+      render: (_, row) => {
         return (
           <Dropdown
             items={[
@@ -134,11 +148,12 @@ export const useIncidents = () => {
   const importIncidents = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       try {
+        setLoading(true)
         if (!e.target.files) return
         const file = e.target.files[0]
         const data = Buffer.from(await file.arrayBuffer()).toString()
-        setLoading(true)
         await client.importIncidents(data)
+        toast.success({ title: 'Incidentes importados com sucesso' })
       } catch (error) {
         toast.error({ title: 'Erro ao importar incidentes', error })
       } finally {
@@ -154,7 +169,7 @@ export const useIncidents = () => {
   }, [listIncidents])
 
   return {
-    rows,
+    rows: incidents,
     columns,
     loading,
     formModal,

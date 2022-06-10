@@ -1,24 +1,15 @@
 import { RcFile } from 'antd/lib/upload'
 
 import { FileType, Incident } from 'shared/models'
+import { getBase64 } from 'shared/services/files'
 
 import { CreateIncident } from './types'
-
-const getBase64 = (img: RcFile): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.addEventListener('load', () => resolve(reader.result as string))
-    reader.addEventListener('error', (err) => reject(err))
-    reader.readAsDataURL(img)
-  })
 
 export const createIncident: CreateIncident = async (incidentDAO) => {
   const incidentsRaw = localStorage.getItem('@incidents') || '[]'
   const incidents = JSON.parse(incidentsRaw) as Incident[]
 
-  const firstIndex = 0
-  const biggetsId = Math.max(...incidents.map((i) => Number(i.id)), firstIndex)
-  const id = (biggetsId + 1).toString()
+  const id = (Math.random() * 10000).toFixed(0).toString()
 
   const attachments = await Promise.all(
     incidentDAO.attachments.map(async (a) => {
@@ -32,7 +23,8 @@ export const createIncident: CreateIncident = async (incidentDAO) => {
   const incident: Incident = {
     ...incidentDAO,
     attachments,
-    id
+    id,
+    createdAt: new Date().toISOString()
   }
 
   incidents.unshift(incident)

@@ -1,3 +1,3 @@
 import { Incident } from '.'
 
-export type IncidentDAO = Omit<Incident, 'id'>
+export type IncidentDAO = Omit<Incident, 'id' | 'createdAt'>

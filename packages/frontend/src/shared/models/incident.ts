@@ -7,4 +7,5 @@ export type Incident = {
   description: string
   priority: IncidentPriority
   attachments: FileType[]
+  createdAt: string
 }

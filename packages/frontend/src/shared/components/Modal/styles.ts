@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: #0003;
+  z-index: 50;
 `
 
 export const Content = styled.div`

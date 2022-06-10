@@ -18,5 +18,9 @@ export const Wrapper = styled.div<WrapperProps>`
     css`
       font-size: 32px;
       font-weight: normal;
+
+      @media (max-width: 600px) {
+        font-size: 18px;
+      }
     `}
 `

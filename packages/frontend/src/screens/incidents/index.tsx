@@ -1,6 +1,7 @@
 import React from 'react'
+import { Table } from 'antd'
 
-import { Button, ConfirmModal, Header, Table, Text } from 'shared/components'
+import { Button, ConfirmModal, Header, Text } from 'shared/components'
 import { CenteredFullViewPort } from 'shared/templates'
 
 import { FormModal } from './components/FormModal'
@@ -63,11 +64,7 @@ export const IncidentsScreens: React.FC = () => {
           </div>
         </header>
 
-        <Table rows={rows} columns={columns} />
-
-        {rows.length === 0 && (
-          <div id="no-options">Nenhum incidente encontrado</div>
-        )}
+        <Table columns={columns} dataSource={rows} scroll={{ x: true }} />
 
         {formViewModal.isOpen && (
           <FormModal
@@ -98,7 +95,7 @@ export const IncidentsScreens: React.FC = () => {
             onClose={deleteModal.close}
             onConfirm={() => deleteIncident(deleteModal.params.id)}
             title={`Deseja mesmo deletar esse incidente ?`}
-            description={`Tem certeza que deseja deletar o incidente com id: #${closeModal.params.id}`}
+            description={`Tem certeza que deseja deletar o incidente com id: #${deleteModal.params.id}`}
           />
         )}
       </S.Wrapper>

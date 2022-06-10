@@ -8,19 +8,20 @@ export const Wrapper = styled.div`
     justify-content: space-between;
     margin: 16px;
 
+    & > div {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: end;
+    }
+
     & button {
       margin-left: 8px;
+      margin-top: 8px;
     }
   }
 
-  #no-options {
-    width: 100%;
-    text-align: center;
-    margin: 16px;
-  }
-
-  table tbody tr td:nth-child(3) {
-    max-width: 100px;
+  table tbody tr td:nth-child(4) {
+    max-width: 200px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
