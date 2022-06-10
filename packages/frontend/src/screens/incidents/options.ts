@@ -6,11 +6,11 @@ export const incidentStatusOptions = [
 ]
 
 export const incidentPriorityMap = {
-  '5': 'Máxima',
+  '5': 'Mínima',
   '4': 'Baixa',
   '3': 'Média',
   '2': 'Alta',
-  '1': 'Mínima'
+  '1': 'Máxima'
 }
 
 export const incidentPriorityOptions = Object.entries(incidentPriorityMap).map(
